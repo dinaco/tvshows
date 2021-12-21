@@ -2,8 +2,17 @@ import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 
 const FormRow = props => {
-  const {children} = props;
-  return <View style={styles.container}>{children}</View>;
+  const {children, first, last} = props;
+  return (
+    <View
+      style={[
+        styles.container,
+        first ? styles.first : null,
+        last ? styles.last : null,
+      ]}>
+      {children}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -14,6 +23,12 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     /* elevation gives a 3d feeling to the style , like a little shadow */
     elevation: 1,
+  },
+  first: {
+    marginTop: 10,
+  },
+  last: {
+    marginBottom: 10,
   },
 });
 
