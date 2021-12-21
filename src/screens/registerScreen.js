@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import FormRow from '../components/formRow';
 import {initializeApp} from 'firebase/app';
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
@@ -50,7 +50,7 @@ newState[field] = value */
     this.setState({loading: true});
     const {email, password} = this.state;
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         this.setState({loading: false});
         this.setState({errorMessage: ''});
@@ -112,11 +112,11 @@ newState[field] = value */
         {this.state.loading ? (
           <ActivityIndicator size="large" />
         ) : (
-          <Button title="Login" onPress={() => this.firebaseauth()} />
+          <Button title="Register" onPress={() => this.firebaseauth()} />
         )}
         <Button
-          title="Register"
-          onPress={() => this.props.navigation.navigate('Register')}
+          title="Login"
+          onPress={({navigation}) => this.props.navigation.navigate('Login')}
         />
         {this.renderErrorMessage()}
       </View>
